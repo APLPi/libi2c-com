@@ -3,7 +3,7 @@
 	⍝ For more information see https://github.com/quick2wire/quick2wire-python-api
 	
 	⍝ Dependencies
-	⍝∇:require =/i2c-admin
+	⍝∇:require =/../I2C
 	
 	I2C_BUS←1
 	ADDRESS←4
@@ -28,13 +28,13 @@
 		
 		'Started'
 		input_loop:
-		char←⊃⎕ARBIN ''
+		char←⊃1 0 ⎕ARBIN ''
 		
 		:Select char
 			:Case 113	⍝ 'q'
 			→input_loop_end
 			:Else
-			funret funerr ← #.I2C.WriteBytes ADDRESS 1 char 0
+			funret funerr ← #.I2C.WriteBytes ADDRESS (,char) 0
 		:EndSelect
 		
 		→input_loop

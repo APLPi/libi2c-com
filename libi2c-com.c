@@ -32,18 +32,15 @@ int CloseI2C(int *err)
 	return 0;
 }
 
-//int WriteBytes(int address, int len, unsigned char *bytes, int *err)
 int WriteBytes(int address, unsigned char bytes[], int *err)
 {
-	unsigned char len = bytes[0];
-	
     struct i2c_rdwr_ioctl_data ioctl_arg;
     struct i2c_msg messages[1];
 
     messages[0].addr  = address;
     messages[0].flags = 0;
-	messages[0].len   = sizeof(unsigned char) * len;
-    messages[0].buf   = ++bytes;
+	messages[0].len   = sizeof(unsigned char) * bytes[0];	// bytes is a counted array
+    messages[0].buf   = bytes + 1;							// ignore the first element
 
     ioctl_arg.msgs  = messages;
     ioctl_arg.nmsgs = 1;
@@ -57,33 +54,29 @@ int WriteBytes(int address, unsigned char bytes[], int *err)
 	return 0;	
 }
 
-int ReadBytes(int address, int reg, int *bytes, int *err)
+int ReadBytes(int address, unsigned char inbytes[], unsigned char outbytes[], int *err)
 {
-    unsigned char indata,outdata;
     struct i2c_rdwr_ioctl_data ioctl_arg;
     struct i2c_msg messages[2];
 	
-    outdata = reg;
     messages[0].addr  = address;
     messages[0].flags = 0;
-    messages[0].len   = sizeof(outdata);
-    messages[0].buf   = &outdata;
+	messages[0].len   = sizeof(unsigned char) * inbytes[0];		// inbytes is a counted array
+    messages[0].buf   = inbytes + 1;							// ignore the first element
 
     messages[1].addr  = address;
     messages[1].flags = I2C_M_RD;
-    messages[1].len   = sizeof(indata);
-    messages[1].buf   = &indata;
+    messages[1].len   = sizeof(unsigned char) * outbytes[0];	// outbytes is a counted array
+    messages[1].buf   = outbytes + 1;							// ignore the first element
 
-    ioctl_arg.msgs      = messages;
-    ioctl_arg.nmsgs     = 2;
+    ioctl_arg.msgs		= messages;
+    ioctl_arg.nmsgs		= 2;
 	
     if(ioctl(fd, I2C_RDWR, &ioctl_arg) < 0)
 	{
 		*err = errno;
 		return -1;
     }
-	
-    *bytes = indata;
 	
 	return 0;
 }

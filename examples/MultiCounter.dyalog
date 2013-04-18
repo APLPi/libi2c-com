@@ -3,7 +3,7 @@
 	⍝ For more information see https://github.com/quick2wire/quick2wire-python-api
 	
 	⍝ Dependencies
-	⍝∇:require =/i2c-admin
+	⍝∇:require =/../I2C
 	
 	I2C_BUS←1
 	IODIR_REGISTER_B←1
