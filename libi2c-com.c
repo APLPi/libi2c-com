@@ -4,6 +4,7 @@
 #include <linux/i2c.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <unistd.h>
 
 static int fd = -1;
 
