@@ -1,0 +1,10 @@
+Package: libi2c-com
+Priority: extra
+Section: libs
+Installed-Size: 28
+Maintainer: jason@dyalog.com
+Architecture: #ARCH#
+Version: 0.1-1
+Provides: libi2c-com
+Description: I2C Communications Layer
+ see http://github.com/APLPi

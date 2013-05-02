@@ -1,0 +1,20 @@
+#!/bin/bash
+
+ARCH=`uname -m`
+
+case $ARCH in
+
+	armv6l)
+		EXPORT_ARCH="armhf"
+		;;
+	x86_64)
+		EXPORT_ARCH="amd64"
+		;;
+	x86)
+		EXPORT_ARCH="x86"
+		;;
+esac
+
+echo $EXPORT_ARCH 
+
+
