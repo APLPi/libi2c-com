@@ -15,3 +15,9 @@
 *.exe
 *.out
 *.app
+
+# packages
+*.msi
+*.deb
+*.rpm
+*.tar.gz
