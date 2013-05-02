@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -fpic
+CFLAGS=-c -Wall -Werror -fpic
 LDFLAGS=-shared
 LIBRARY=libi2c-com.so
 
