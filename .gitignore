@@ -16,8 +16,15 @@
 *.out
 *.app
 
-# packages
+# Packages
 *.msi
 *.deb
 *.rpm
 *.tar.gz
+
+# Other files
+*.log
+
+# Directories
+package/
+
