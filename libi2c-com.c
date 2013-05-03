@@ -33,7 +33,7 @@ int CloseI2C(int *err)
 	return 0;
 }
 
-int WriteBytes(int address, unsigned char bytes[], int *err)
+int WriteBytes(int address, unsigned char bytes[256], int *err)
 {
     struct i2c_rdwr_ioctl_data ioctl_arg;
     struct i2c_msg messages[1];
@@ -55,23 +55,18 @@ int WriteBytes(int address, unsigned char bytes[], int *err)
 	return 0;	
 }
 
-int ReadBytes(int address, unsigned char inbytes[], unsigned char outbytes[], int *err)
+int ReadBytes(int address, unsigned char bytes[256], int *err)
 {
     struct i2c_rdwr_ioctl_data ioctl_arg;
-    struct i2c_msg messages[2];
-	
-    messages[0].addr  = address;
-    messages[0].flags = 0;
-	messages[0].len   = sizeof(unsigned char) * inbytes[0];		// inbytes is a counted array
-    messages[0].buf   = inbytes + 1;							// ignore the first element
+    struct i2c_msg messages[1];
 
-    messages[1].addr  = address;
-    messages[1].flags = I2C_M_RD;
-    messages[1].len   = sizeof(unsigned char) * outbytes[0];	// outbytes is a counted array
-    messages[1].buf   = outbytes + 1;							// ignore the first element
+    messages[0].addr  = address;
+    messages[0].flags = I2C_M_RD;
+    messages[0].len   = sizeof(unsigned char) * bytes[0];	// bytes is a counted array
+    messages[0].buf   = bytes;								// include first element as we're receiving data
 
     ioctl_arg.msgs		= messages;
-    ioctl_arg.nmsgs		= 2;
+    ioctl_arg.nmsgs		= 1;
 	
     if(ioctl(fd, I2C_RDWR, &ioctl_arg) < 0)
 	{
