@@ -1,0 +1,2 @@
+#!/bin/bash
+cat DEBIAN/control | awk '/Version/ {print $2}'
