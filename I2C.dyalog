@@ -4,6 +4,6 @@
 
 	'OpenI2C' ⎕NA 'I libi2c-com.so|OpenI2C I I =I'
 	'CloseI2C' ⎕NA 'I libi2c-com.so|CloseI2C =I'
-	'WriteBytes' ⎕NA 'I libi2c-com.so|WriteBytes I <#U1 =I'
-	'ReadBytes' ⎕NA 'I libi2c-com.so|ReadBytes I >#U1 =I'
+	'WriteBytes' ⎕NA 'I libi2c-com.so|WriteBytes I <#U1[256] =I'
+	'ReadBytes' ⎕NA 'I libi2c-com.so|ReadBytes I >#U1[256] =I'
 :EndNamespace
