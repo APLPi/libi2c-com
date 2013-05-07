@@ -25,11 +25,8 @@ deb: all
 	cp -R DEBIAN package/
 	sed -i "s/#ARCH#/$(_ARCH)/" package/DEBIAN/control
 	install -m 0644 libi2c-com.so package/usr/lib
-	dpkg-deb -b package libi2c-com_0.1-1_$(_ARCH).deb &> dpkgbuild.log
+	dpkg-deb -b package libi2c-com_0.1-1_$(_ARCH).deb
 	
 clean:
 	rm -rf *o *so *.deb
 	rm -Rf package
-	
-	
-
