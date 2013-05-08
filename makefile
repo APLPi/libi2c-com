@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-c -Wall -Werror -fpic
 LDFLAGS=-shared
 LIBRARY=libi2c-com.so
+VERSION=$(shell ./scripts/get_version)
 prefix=/usr/lib
 ifndef _ARCH
 	_ARCH:= $(shell ./scripts/print_arch)
@@ -25,7 +26,7 @@ deb: all
 	cp -R DEBIAN package/
 	sed -i "s/#ARCH#/$(_ARCH)/" package/DEBIAN/control
 	install -m 0644 libi2c-com.so package/usr/lib
-	dpkg-deb -b package libi2c-com_0.1-1_$(_ARCH).deb
+	dpkg-deb -b package libi2c-com_$(VERSION)_$(_ARCH).deb
 	
 clean:
 	rm -rf *o *so *.deb
