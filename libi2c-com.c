@@ -33,7 +33,7 @@ int CloseI2C(int *err)
 	return 0;
 }
 
-int WriteBytes(int address, unsigned char bytes[256], int *err)
+int WriteBytes(int address, unsigned char bytes[], int *err)
 {
     struct i2c_rdwr_ioctl_data ioctl_arg;
     struct i2c_msg messages[1];
