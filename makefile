@@ -29,7 +29,10 @@ uninstall:
 
 deb: all
 	mkdir -p package/usr/lib
+	mkdir -p package/usr/share/libi2c-com
+	cp -R examples package/usr/share/libi2c-com/
 	cp -R DEBIAN package/
+	chmod 666 package/usr/share/libi2c-com/examples/*
 	sed -i "s/#ARCH#/$(_ARCH)/" package/DEBIAN/control
 	sed -i "s/#COMMVERSION#/$(_COMMVERSION)/" package/DEBIAN/control
 	install -m 0644 $(LIBRARY).$(VERSION) package/usr/lib
