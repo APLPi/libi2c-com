@@ -1,2 +1,8 @@
 #!/bin/bash
-cat DEBIAN/control | awk '/Version/ {print $2}'
+major=`cat DEBIAN/control | awk '/Version/ {print $2}'`
+
+minor=`git rev-list HEAD --count`
+
+version=`echo ${major} | sed "s/#COMMVERSION#/${minor}/"`
+
+echo "${version}"
